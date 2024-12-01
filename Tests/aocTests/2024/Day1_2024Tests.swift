@@ -25,3 +25,13 @@ final class Day1_2024Tests: XCTestCase {
         XCTAssertEqual(result as? Int, 11, "Expected total list distance to be 11") 
     }
 }
+
+final class SimilarityScoreTests: XCTestCase {
+    func testCalculateSimilarityScore() {
+        // Test case 1
+        let list1 = [3, 4, 2, 1, 3, 3]
+        let list2 = [4, 3, 5, 3, 9, 3]
+        let result1 = similarityScore(l1: list1, l2: list2)
+        XCTAssertEqual(result1, 31)
+    }
+}
