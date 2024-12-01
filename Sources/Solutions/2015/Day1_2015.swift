@@ -1,4 +1,4 @@
-struct Day1: AdventSolution {
+struct Day1_2015: AdventSolution {
     static func solvePart1(input: String) -> Any {
         let ups = input.filter { $0 == "(" }.count
         let downs = input.filter { $0 == ")" }.count
