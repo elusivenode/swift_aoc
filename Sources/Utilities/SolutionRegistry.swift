@@ -6,6 +6,7 @@ struct SolutionRegistry {
         ], 
         2024: [
             1: Day1_2024.self,
+            2: Day2_2024.self,
             // Add more days here
         ]
         // Add more years here
