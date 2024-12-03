@@ -18,7 +18,12 @@ final class ExecuteMulInstructionsTests: XCTestCase {
 final class ParseMulInstructionsTests: XCTestCase {
     func testParseMulInstructions() {
         let input = "xmul(2,4)%&mul[3,7]!@^do_not_mul(5,5)+mul(32,64]then(mul(11,8)mul(8,5))"
-        XCTAssertEqual(parseMulInstructions(input: input), ["mul(2,4)", "mul(3,7)", "mul(5,5)", "mul(32,64)", "mul(11,8)", "mul(8,5), blah"])
+        XCTAssertEqual(parseMulInstructions(input: input), ["mul(2,4)", "mul(3,7)", "mul(5,5)", "mul(32,64)", "mul(11,8)", "mul(8,5)"])
+    }
+
+    func testParseMulInstructionsPlus() {
+        let input = "xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))"
+        XCTAssertEqual(parseMulInstructionsPlus(input: input), ["mul(2,4)", "don't()", "mul(5,5)", "mul(11,8)", "do()", "mul(8,5)"])
     }
 }
 
@@ -27,6 +32,12 @@ final class Day3_2024Tests: XCTestCase {
         let input = "xmul(2,4)%&mul[3,7]!@^do_not_mul(5,5)+mul(32,64]then(mul(11,8)mul(8,5))"
         let result = Day3_2024.solvePart1(input: input)
         XCTAssertEqual(result as? Int, 161) 
+    }
+
+    func testSolvePart2() {
+        let input = "xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))"
+        let result = Day3_2024.solvePart2(input: input)
+        XCTAssertEqual(result as? Int, 48) 
     }
 }
     

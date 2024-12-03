@@ -12,7 +12,19 @@ struct Day3_2024: AdventSolution {
             
 
     static func solvePart2(input: String) -> Any {
-        return 0
+        let instructions = parseMulInstructionsPlus(input: input)
+        var process = true
+        var total = 0
+        for instruction in instructions {
+            if instruction == "don't()" {
+                process = false
+            } else if instruction == "do()" {
+                process = true
+            } else if process {
+                total += executeMulInstructions(input: instruction)
+            }
+        }
+        return total
     }
 }
 
@@ -34,6 +46,15 @@ func executeMulInstructions(input: String) -> Int {
 
 func parseMulInstructions(input: String) -> [String] {
     let pattern = #"mul\(\d+,\d+\)"#
+    let regex = try! NSRegularExpression(pattern: pattern)
+    let matches = regex.matches(in: input, range: NSRange(input.startIndex..<input.endIndex, in: input))
+    return matches.compactMap { match in 
+        Range(match.range, in: input).map { String(input[$0]) }
+    }
+}
+
+func parseMulInstructionsPlus(input: String) -> [String] {
+    let pattern = #"(mul\(\d+,\d+\)|do\(\)|don't\(\))"#
     let regex = try! NSRegularExpression(pattern: pattern)
     let matches = regex.matches(in: input, range: NSRange(input.startIndex..<input.endIndex, in: input))
     return matches.compactMap { match in 
